@@ -1,21 +1,24 @@
 package com.orderservice.shoppit.controller;
 
-import com.orderservice.shoppit.exceptions.SomethingWrongException;
 import com.orderservice.shoppit.repository.CustomerRepository;
 import com.orderservice.shoppit.repository.OrderRepository;
 import com.orderservice.shoppit.repository.ProductRepository;
 import com.orderservice.shoppit.request.CustomerRequest;
+import com.orderservice.shoppit.request.EmailRequest;
 import com.orderservice.shoppit.request.OrderRequest;
 import com.orderservice.shoppit.request.ProductRequest;
 import com.orderservice.shoppit.response.*;
 import com.orderservice.shoppit.service.CustomerService;
+import com.orderservice.shoppit.service.EmailService;
 import com.orderservice.shoppit.service.OrderService;
 import com.orderservice.shoppit.service.ProductService;
-import org.hibernate.query.sql.internal.ParameterRecognizerImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/")
@@ -32,6 +35,10 @@ public class OrderController {
     private OrderService orderService;
     @Autowired
     private OrderRepository orderRepository;
+
+    @Autowired
+    private EmailService emailService;
+
     @PostMapping("/product")
     public ResponseEntity<ProductResponse> addProduct(@RequestBody ProductRequest productRequest){
         return new ResponseEntity<>(productService.addProduct(productRequest), HttpStatus.CREATED);
@@ -103,5 +110,13 @@ public class OrderController {
         }
         return new ResponseEntity<>(new OrderDeleteResponse("fail", "order with id "+id+" not found"), HttpStatus.NOT_FOUND);
 //        throw new SomethingWrongException("custom exception triggered");
+    }
+    @PostMapping("/email")
+    public EmailResponse sentEmail(@RequestBody EmailRequest emailRequest){
+        Map<String, Object> user = new HashMap<>();
+        user.put("name","Ajith");
+        user.put("location","IND");
+        return emailService.sendEmail(emailRequest,user);
+
     }
 }
