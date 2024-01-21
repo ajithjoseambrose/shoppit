@@ -14,6 +14,7 @@
 	<name>shoppit</name>
 	<description>project for order service</description>
 	<properties>
+		<sonar.java.libraries>target/shoppit-app.jar</sonar.java.libraries>
 		<java.version>17</java.version>
 	</properties>
 	<dependencies>
@@ -67,6 +68,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<finalName>shoppit-app</finalName>
 	</build>
 
 </project>
