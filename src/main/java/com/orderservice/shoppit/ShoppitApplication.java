@@ -13,11 +13,5 @@ public class ShoppitApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(ShoppitApplication.class, args);
 	}
-	@Autowired
-	private SimpleEmail simpleEmail;
-//	@EventListener(ApplicationEvent.class)
-//	public void simpleEmail(){
-//		simpleEmail.sendEmail("ajithj71@gmail.com","Test my own email", "Hi, Ajith this is just to test the email..");
-//	}
 
 }
