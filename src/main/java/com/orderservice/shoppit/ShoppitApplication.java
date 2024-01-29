@@ -12,7 +12,7 @@ public class ShoppitApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ShoppitApplication.class, args);
-		System.out.println("Testing vFour");
+		System.out.println("Testing vFive");
 	}
 
 }
